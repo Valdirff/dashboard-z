@@ -3,35 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Zombicide – Dashboard (Landscape)</title>
+  <title>Zombicide – Dashboard (Portrait)</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="screen edge">
-    <section class="dash" aria-label="Dashboard Zombicide (celular deitado)">
-      <!-- ESQUERDA: 7 bolinhas de habilidades -->
-      <aside class="side left" aria-label="Habilidades">
-        <div class="sideTitle">HABILIDADES</div>
-        <div class="dots" id="skillDots" role="group" aria-label="Marcadores de habilidade (7)"></div>
-      </aside>
+  <main class="screen">
+    <section class="dash" aria-label="Dashboard Zombicide (celular vertical)">
 
-      <!-- CENTRO: só o texto -->
-      <section class="center" aria-label="Área central">
-        <div class="brand">ZOMBICIDE</div>
-      </section>
+      <!-- TOPO: Habilidades + Vida -->
+      <header class="top">
+        <section class="panel" aria-label="Habilidades">
+          <div class="title">HABILIDADES</div>
+          <div class="dots skills" id="skillDots" role="group" aria-label="Marcadores de habilidade (7)"></div>
+        </section>
 
-      <!-- DIREITA: 4 bolinhas de vida -->
-      <aside class="side right" aria-label="Vida">
-        <div class="sideTitle">VIDA</div>
-        <div class="dots" id="lifeDots" role="group" aria-label="Marcadores de vida (4)"></div>
-      </aside>
+        <section class="panel" aria-label="Vida">
+          <div class="title">VIDA</div>
+          <div class="dots life" id="lifeDots" role="group" aria-label="Marcadores de vida (4)"></div>
+        </section>
+      </header>
 
-      <!-- BASE: trilha adrenalina 0..43 -->
-      <footer class="bottom" aria-label="Trilha de adrenalina">
-        <div class="bottomTop">
+      <!-- BAIXO: PA -->
+      <footer class="paPanel" aria-label="Pontos de Adrenalina">
+        <div class="paTop">
           <div class="pill" id="lvlPill">AZUL</div>
-          <div class="pa"><span id="paValue">0</span> PA</div>
-          <button class="btn ghost" id="reset">Reset</button>
+          <div class="paValue"><span id="paValue">0</span> PA</div>
+          <button class="btn" id="reset">Reset</button>
         </div>
 
         <div class="trackWrap">
@@ -40,6 +37,7 @@
           <div class="ticks" id="ticks" aria-hidden="true"></div>
         </div>
       </footer>
+
     </section>
   </main>
 
