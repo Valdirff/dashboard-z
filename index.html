@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Zombicide – Dashboard (Landscape)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="screen">
+    <section class="dash" aria-label="Dashboard Zombicide (celular deitado)">
+      <!-- ESQUERDA: 7 bolinhas de habilidades -->
+      <aside class="side left" aria-label="Habilidades">
+        <div class="sideTitle">HABILIDADES</div>
+        <div class="dots" id="skillDots" role="group" aria-label="Marcadores de habilidade (7)"></div>
+        <div class="hint">Toque para ligar/desligar.</div>
+      </aside>
+
+      <!-- CENTRO: área “plástica” só visual -->
+      <section class="center" aria-label="Área central">
+        <div class="brand">ZOMBICIDE</div>
+        <div class="nameRow">
+          <input id="playerName" class="name" type="text" placeholder="Nome (opcional)" />
+        </div>
+      </section>
+
+      <!-- DIREITA: 4 bolinhas de vida -->
+      <aside class="side right" aria-label="Vida">
+        <div class="sideTitle">VIDA</div>
+        <div class="dots" id="lifeDots" role="group" aria-label="Marcadores de vida (4)"></div>
+        <div class="hint">Toque para marcar ferimentos.</div>
+      </aside>
+
+      <!-- BASE: trilha adrenalina 0..43 -->
+      <footer class="bottom" aria-label="Trilha de adrenalina">
+        <div class="bottomTop">
+          <div class="pill" id="lvlPill">AZUL</div>
+          <div class="pa"><span id="paValue">0</span> PA</div>
+          <button class="btn ghost" id="reset">Reset</button>
+        </div>
+
+        <div class="trackWrap">
+          <div class="trackColor" aria-hidden="true"></div>
+          <input id="adrenaline" class="slider" type="range" min="0" max="43" value="0" />
+          <div class="ticks" id="ticks" aria-hidden="true"></div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
