@@ -1,11 +1,11 @@
-const KEY = "z_dash_landscape_v2";
+const KEY = "z_dash_portrait_v1";
 
 const $ = (id) => document.getElementById(id);
 
 const state = {
   adrenaline: 0,
-  skill: Array(7).fill(false), // 7 bolinhas habilidades
-  life: Array(4).fill(false)   // 4 bolinhas vida
+  skill: Array(7).fill(false),
+  life: Array(4).fill(false)
 };
 
 function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
@@ -27,10 +27,7 @@ function pillBg(lvl){
   }
 }
 
-function save(){
-  localStorage.setItem(KEY, JSON.stringify(state));
-}
-
+function save(){ localStorage.setItem(KEY, JSON.stringify(state)); }
 function load(){
   try{
     const raw = localStorage.getItem(KEY);
@@ -49,7 +46,6 @@ function makeDots(containerId, count, arrKey){
     b.type = "button";
     b.className = "dot" + (state[arrKey][i] ? " on" : "");
     b.setAttribute("aria-pressed", state[arrKey][i] ? "true" : "false");
-    b.setAttribute("aria-label", `${arrKey === "skill" ? "Habilidade" : "Vida"} ${i+1}`);
 
     b.addEventListener("click", ()=>{
       state[arrKey][i] = !state[arrKey][i];
@@ -92,7 +88,7 @@ function buildTicks(){
     const lab = document.createElement("div");
     lab.className = "tickLabel";
     const pct = (v / 43) * 100;
-    lab.style.left = `calc(12px + (100% - 24px) * ${pct/100})`;
+    lab.style.left = `calc(14px + (100% - 28px) * ${pct/100})`;
     lab.textContent = String(v);
     trackWrap.appendChild(lab);
   }
