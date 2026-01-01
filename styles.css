@@ -1,9 +1,7 @@
 :root{
   --bg:#0b0b0c;
-
   --red1:#8b1018;
   --red2:#b31723;
-
   --stroke:rgba(255,255,255,.12);
   --text:#f3f5f7;
 
@@ -24,35 +22,91 @@ body{
   color:var(--text);
 }
 
-/* EDGE = quase colado na tela */
+/* colado na tela */
 .screen.edge{
   min-height:100dvh;
   display:grid;
-  place-items:center;
-  padding: 2px;
+  place-items:stretch;
+  padding: 0; /* <<< tira folga externa */
 }
 
-/* SUPER compacto em altura */
+/* ======= GRADE SUPER COMPACTA ======= */
 .dash{
   width: 100vw;
-  height: 100dvh;                 /* <<< ocupa certinho a tela visível */
-  max-width: 980px;
+  height: 100dvh;        /* <<< usa altura visível real do mobile */
+  max-width: 1100px;
 
   display:grid;
-  grid-template-columns: 190px 1fr 190px;
-  grid-template-rows: 1fr 92px;   /* <<< MAIS BAIXO AINDA: PA sempre aparece */
-  gap:6px;
-  padding: 4px;
+
+  /* laterais FINAS, centro enorme */
+  grid-template-columns: 92px 1fr 92px;  /* <<< afina MUITO */
+  grid-template-rows: 1fr 78px;          /* <<< PA tem espaço garantido */
+
+  gap: 6px;              /* <<< menos espaço entre blocos */
+  padding: 6px;          /* <<< pequeno */
 }
 
-/* cartões */
+/* blocos */
 .center, .side, .bottom{
   border-radius:14px;
   border:1px solid var(--stroke);
-  box-shadow: 0 12px 34px rgba(0,0,0,.45);
+  box-shadow: 0 10px 28px rgba(0,0,0,.45);
 }
 
-/* centro só texto */
+/* ======= TOPO (mais baixo “visualmente”) ======= */
+/* Coloca os três blocos superiores mais compactos: menos padding e menos elementos */
+.side{
+  grid-row:1;
+  padding:6px 4px; /* <<< BEM menor */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.08), transparent 35%),
+    linear-gradient(135deg, rgba(139,16,24,.95), rgba(179,23,35,.95));
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  justify-content:flex-start;
+}
+
+.side.left{ grid-column:1; align-items:flex-start; }
+.side.right{ grid-column:3; align-items:flex-end; }
+
+.sideTitle{
+  width:100%;
+  text-align:center;
+  font-weight:1000;
+  letter-spacing:.10em;
+  font-size:10px;
+  opacity:.92;
+  margin-top:2px;
+}
+
+.dots{
+  width:100%;
+  display:grid;
+  gap:8px; /* <<< mais compacto */
+}
+
+.side.left .dots{ justify-items:start; padding-left: 6px; }
+.side.right .dots{ justify-items:end; padding-right: 6px; }
+
+.dot{
+  width:26px;            /* <<< bolinhas menores = laterais mais finas */
+  height:26px;
+  border-radius:999px;
+  border:2px solid rgba(0,0,0,.25);
+  background: rgba(255,255,255,.28);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.10),
+              0 8px 14px rgba(0,0,0,.22);
+  cursor:pointer;
+  touch-action: manipulation;
+}
+.dot.on{
+  background: rgba(0,0,0,.35);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.12),
+              0 8px 14px rgba(0,0,0,.22);
+}
+
+/* ======= CENTRO (MAIOR LATERALMENTE) ======= */
 .center{
   grid-column:2;
   grid-row:1;
@@ -66,20 +120,19 @@ body{
   overflow:hidden;
 }
 
-/* detalhe leve de “furinhos” */
 .center::before{
   content:"";
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at 22% 14%, rgba(0,0,0,.30) 0 6px, transparent 7px),
-    radial-gradient(circle at 32% 14%, rgba(0,0,0,.30) 0 6px, transparent 7px),
-    radial-gradient(circle at 42% 14%, rgba(0,0,0,.30) 0 6px, transparent 7px),
-    radial-gradient(circle at 52% 14%, rgba(0,0,0,.30) 0 6px, transparent 7px),
-    radial-gradient(circle at 62% 14%, rgba(0,0,0,.30) 0 6px, transparent 7px),
-    radial-gradient(circle at 72% 14%, rgba(0,0,0,.30) 0 6px, transparent 7px),
-    radial-gradient(circle at 82% 14%, rgba(0,0,0,.30) 0 6px, transparent 7px);
-  opacity:.30;
+    radial-gradient(circle at 22% 12%, rgba(0,0,0,.30) 0 6px, transparent 7px),
+    radial-gradient(circle at 32% 12%, rgba(0,0,0,.30) 0 6px, transparent 7px),
+    radial-gradient(circle at 42% 12%, rgba(0,0,0,.30) 0 6px, transparent 7px),
+    radial-gradient(circle at 52% 12%, rgba(0,0,0,.30) 0 6px, transparent 7px),
+    radial-gradient(circle at 62% 12%, rgba(0,0,0,.30) 0 6px, transparent 7px),
+    radial-gradient(circle at 72% 12%, rgba(0,0,0,.30) 0 6px, transparent 7px),
+    radial-gradient(circle at 82% 12%, rgba(0,0,0,.30) 0 6px, transparent 7px);
+  opacity:.28;
   pointer-events:none;
 }
 
@@ -87,68 +140,17 @@ body{
   position:relative;
   z-index:1;
   font-weight:1000;
-  letter-spacing:.16em;
-  font-size: clamp(18px, 4.2vw, 34px);
+  letter-spacing:.18em;
+  font-size: clamp(18px, 4.6vw, 40px);
   text-shadow: 0 2px 0 rgba(0,0,0,.25);
   opacity:.92;
 }
 
-/* laterais coladas */
-.side{
-  grid-row:1;
-  padding:8px 6px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.08), transparent 35%),
-    linear-gradient(135deg, rgba(139,16,24,.95), rgba(179,23,35,.95));
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  justify-content:flex-start;
-}
-
-.side.left{ grid-column:1; align-items:flex-start; }
-.side.right{ grid-column:3; align-items:flex-end; }
-
-.sideTitle{
-  width:100%;
-  text-align:center;
-  font-weight:1000;
-  letter-spacing:.10em;
-  font-size:10px;
-  opacity:.9;
-}
-
-.dots{
-  width:100%;
-  display:grid;
-  gap:8px;
-}
-
-.side.left .dots{ justify-items:start; padding-left: 8px; }
-.side.right .dots{ justify-items:end; padding-right: 8px; }
-
-.dot{
-  width:28px;
-  height:28px;
-  border-radius:999px;
-  border:2px solid rgba(0,0,0,.25);
-  background: rgba(255,255,255,.28);
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.10),
-              0 8px 16px rgba(0,0,0,.22);
-  cursor:pointer;
-  touch-action: manipulation;
-}
-.dot.on{
-  background: rgba(0,0,0,.35);
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.12),
-              0 8px 16px rgba(0,0,0,.22);
-}
-
-/* barra de PA: ultra baixa */
+/* ======= RODAPÉ (PA SEMPRE APARECE) ======= */
 .bottom{
   grid-column:1 / 4;
   grid-row:2;
-  padding:8px;
+  padding:6px 8px;
   background:
     linear-gradient(180deg, rgba(255,255,255,.08), transparent 35%),
     linear-gradient(135deg, var(--red2), var(--red1));
@@ -171,7 +173,7 @@ body{
   border-radius:999px;
   border:1px solid rgba(255,255,255,.15);
   background: rgba(0,0,0,.22);
-  min-width:100px;
+  min-width:96px;
   text-align:center;
   font-size:11px;
 }
@@ -193,20 +195,21 @@ body{
   font-size:11px;
 }
 
+/* trilha ainda mais baixa */
 .trackWrap{
   position:relative;
-  height:34px;             /* <<< mais baixo ainda */
+  height:30px;            /* <<< BAIXO */
   border-radius:12px;
   border:1px solid rgba(255,255,255,.12);
   background: rgba(0,0,0,.18);
   overflow:hidden;
-  padding: 8px 10px 10px;
+  padding: 7px 10px 8px;
 }
 
 .trackColor{
   position:absolute;
   left:10px; right:10px;
-  top:8px; height:10px;
+  top:7px; height:9px;
   border-radius:999px;
   opacity:.95;
   background: linear-gradient(to right,
@@ -227,7 +230,7 @@ body{
   left:10px; right:10px;
   top:0px;
   width: calc(100% - 20px);
-  height: 30px;
+  height: 26px;
   background: transparent;
   -webkit-appearance:none;
   appearance:none;
@@ -241,39 +244,39 @@ body{
   border-radius:50%;
   background: rgba(255,255,255,.92);
   border:2px solid rgba(0,0,0,.35);
-  box-shadow: 0 9px 16px rgba(0,0,0,.28);
+  box-shadow: 0 8px 14px rgba(0,0,0,.28);
   cursor:pointer;
 }
 .slider::-webkit-slider-runnable-track{
-  height:30px;
+  height:26px;
   background: transparent;
 }
 
 .ticks{
   position:absolute;
   left:10px; right:10px;
-  bottom:3px;
-  height:7px;
+  bottom:2px;
+  height:6px;
   display:flex;
   justify-content:space-between;
   pointer-events:none;
   opacity:.85;
 }
-.tick{ width:2px; height:7px; background: rgba(255,255,255,.55); }
-.tick.big{ height:9px; opacity:.95; }
+.tick{ width:2px; height:6px; background: rgba(255,255,255,.55); }
+.tick.big{ height:8px; opacity:.95; }
 
 .tickLabel{
   position:absolute;
-  bottom:-3px;
+  bottom:-4px;
   transform: translateX(-50%);
-  font-size:9px;
+  font-size:8px;
   color: rgba(255,255,255,.85);
   text-shadow: 0 1px 0 rgba(0,0,0,.30);
 }
 
-/* Se o celular for MUITO baixo, dá mais uma comprimida */
+/* se a altura do aparelho for MUITO baixa, garante ainda mais */
 @media (max-height: 360px){
-  .dash{ grid-template-rows: 1fr 82px; }
-  .dot{ width:26px; height:26px; }
-  .trackWrap{ height:30px; }
+  .dash{ grid-template-rows: 1fr 70px; }
+  .dot{ width:24px; height:24px; }
+  .trackWrap{ height:28px; }
 }
