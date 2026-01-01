@@ -34,7 +34,9 @@ body{
   height:100dvh;
   max-height: 980px;
   display:grid;
-  grid-template-rows: 1fr 0.62fr; /* topo maior, PA grande mas não exagera */
+
+  /* mais espaço pro PA (slider maior) */
+  grid-template-rows: 1fr 0.85fr;
   gap:10px;
 }
 
@@ -69,31 +71,19 @@ body{
   opacity:.95;
 }
 
+/* ===== BOLINHAS VERTICAIS (como antes) ===== */
 .dots{
   flex:1;
   display:grid;
+  grid-template-columns: 1fr;  /* <<< uma coluna */
   align-content:start;
-  justify-content:center;
+  justify-items:center;
   gap:14px;
 }
 
-/* habilidades: 7 bolinhas (3+3+1 central) */
-.dots.skills{
-  grid-template-columns: 1fr 1fr 1fr;
-}
-.dots.skills .dot:last-child{
-  grid-column: 2; /* centraliza a 7ª */
-}
-
-/* vida: 4 bolinhas em 2x2 */
-.dots.life{
-  grid-template-columns: 1fr 1fr;
-}
-
-/* bolinha maior e mais “clicável” */
 .dot{
-  width:54px;
-  height:54px;
+  width:56px;
+  height:56px;
   border-radius:999px;
   border:2px solid rgba(0,0,0,.28);
   background: rgba(255,255,255,.26);
@@ -160,20 +150,21 @@ body{
   cursor:pointer;
 }
 
+/* ===== SLIDER MAIOR (altura maior) ===== */
 .trackWrap{
   position:relative;
-  height:78px;             /* slider grande e fácil no dedo */
-  border-radius:16px;
+  height:120px;            /* <<< AUMENTA BASTANTE */
+  border-radius:18px;
   border:1px solid rgba(255,255,255,.12);
   background: rgba(0,0,0,.18);
   overflow:hidden;
-  padding: 18px 14px 22px;
+  padding: 26px 14px 28px;
 }
 
 .trackColor{
   position:absolute;
   left:14px; right:14px;
-  top:20px; height:16px;
+  top:34px; height:18px;
   border-radius:999px;
   opacity:.95;
   background: linear-gradient(to right,
@@ -192,9 +183,9 @@ body{
 .slider{
   position:absolute;
   left:14px; right:14px;
-  top:10px;
+  top:18px;
   width: calc(100% - 28px);
-  height: 52px;
+  height: 84px;            /* <<< trilho grande pra dedo */
   background: transparent;
   -webkit-appearance:none;
   appearance:none;
@@ -203,8 +194,8 @@ body{
 .slider::-webkit-slider-thumb{
   -webkit-appearance:none;
   appearance:none;
-  width:28px;
-  height:28px;
+  width:34px;              /* <<< thumb maior */
+  height:34px;
   border-radius:50%;
   background: rgba(255,255,255,.92);
   border:2px solid rgba(0,0,0,.35);
@@ -212,34 +203,34 @@ body{
   cursor:pointer;
 }
 .slider::-webkit-slider-runnable-track{
-  height:52px;
+  height:84px;
   background: transparent;
 }
 
 .ticks{
   position:absolute;
   left:14px; right:14px;
-  bottom:10px;
-  height:12px;
+  bottom:12px;
+  height:14px;
   display:flex;
   justify-content:space-between;
   pointer-events:none;
   opacity:.9;
 }
-.tick{ width:2px; height:12px; background: rgba(255,255,255,.55); }
-.tick.big{ height:16px; opacity:.98; }
+.tick{ width:2px; height:14px; background: rgba(255,255,255,.55); }
+.tick.big{ height:18px; opacity:.98; }
 
 .tickLabel{
   position:absolute;
   bottom:-2px;
   transform: translateX(-50%);
-  font-size:11px;
+  font-size:12px;
   color: rgba(255,255,255,.88);
   text-shadow: 0 1px 0 rgba(0,0,0,.30);
 }
 
-/* ajustes p/ telas menores */
+/* se for tela bem pequena */
 @media (max-width: 360px){
-  .dot{ width:48px; height:48px; }
-  .trackWrap{ height:72px; }
+  .dot{ width:50px; height:50px; }
+  .trackWrap{ height:110px; }
 }
