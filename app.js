@@ -1,9 +1,8 @@
-const KEY = "z_dash_landscape_v1";
+const KEY = "z_dash_landscape_v2";
 
 const $ = (id) => document.getElementById(id);
 
 const state = {
-  name: "",
   adrenaline: 0,
   skill: Array(7).fill(false), // 7 bolinhas habilidades
   life: Array(4).fill(false)   // 4 bolinhas vida
@@ -64,22 +63,18 @@ function makeDots(containerId, count, arrKey){
 }
 
 function buildTicks(){
-  // ticks “bonitos” (não lotar de 0..43)
-  // marca principais: 0,7,19,43 e algumas intermediárias
   const marks = [0, 7, 19, 43];
   const minor = [3, 10, 13, 25, 31, 37, 40];
 
   const ticks = $("ticks");
   ticks.innerHTML = "";
 
-  // vamos gerar 44 posições e decidir o que desenhar
   for (let v = 0; v <= 43; v++){
     const t = document.createElement("div");
     const isBig = marks.includes(v);
     const isMinor = minor.includes(v);
 
     if (!isBig && !isMinor){
-      // mantém espaçamento sem desenhar: cria um “tick” transparente
       t.className = "tick";
       t.style.opacity = "0";
       ticks.appendChild(t);
@@ -90,16 +85,14 @@ function buildTicks(){
     ticks.appendChild(t);
   }
 
-  // labels dos principais
   const trackWrap = document.querySelector(".trackWrap");
-  // remove labels antigos
   trackWrap.querySelectorAll(".tickLabel").forEach(n => n.remove());
 
   for (const v of marks){
     const lab = document.createElement("div");
     lab.className = "tickLabel";
     const pct = (v / 43) * 100;
-    lab.style.left = `calc(14px + (100% - 28px) * ${pct/100})`;
+    lab.style.left = `calc(12px + (100% - 24px) * ${pct/100})`;
     lab.textContent = String(v);
     trackWrap.appendChild(lab);
   }
@@ -114,16 +107,10 @@ function renderAdrenaline(){
   pill.textContent = lvl;
   pill.style.background = pillBg(lvl);
 
-  const slider = $("adrenaline");
-  slider.value = String(pa);
+  $("adrenaline").value = String(pa);
 }
 
 function bind(){
-  $("playerName").addEventListener("input", (e)=>{
-    state.name = e.target.value;
-    save();
-  });
-
   $("adrenaline").addEventListener("input", (e)=>{
     state.adrenaline = clamp(Number(e.target.value), 0, 43);
     save();
@@ -137,16 +124,11 @@ function bind(){
   });
 }
 
-function hydrate(){
-  $("playerName").value = state.name || "";
-  renderAdrenaline();
-}
-
 (function init(){
   load();
   buildTicks();
   makeDots("skillDots", 7, "skill");
   makeDots("lifeDots", 4, "life");
   bind();
-  hydrate();
+  renderAdrenaline();
 })();
