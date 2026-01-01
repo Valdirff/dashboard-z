@@ -36,7 +36,7 @@ body{
   display:grid;
 
   /* mais espaço pro PA (slider maior) */
-  grid-template-rows: 1fr 0.85fr;
+  grid-template-rows: 1.25fr 0.75fr;
   gap:10px;
 }
 
@@ -234,3 +234,4 @@ body{
   .dot{ width:50px; height:50px; }
   .trackWrap{ height:110px; }
 }
+
