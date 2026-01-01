@@ -4,7 +4,6 @@
   /* “plástico vermelho” */
   --red1:#8b1018;
   --red2:#b31723;
-  --red3:#5f0a10;
 
   --stroke:rgba(255,255,255,.12);
   --text:#f3f5f7;
@@ -31,24 +30,24 @@ body{
   min-height:100%;
   display:grid;
   place-items:center;
-  padding: 12px;
+  padding: 8px; /* MENOS padding pra caber no celular */
 }
 
 /* layout landscape */
 .dash{
-  width: min(980px, 98vw);
-  height: min(520px, 92vh);
+  width: min(980px, 100vw);
+  height: min(420px, 100vh);              /* <<< REDUZ a altura geral */
   display:grid;
-  grid-template-columns: 170px 1fr 170px;
-  grid-template-rows: 1fr 150px;
-  gap:12px;
+  grid-template-columns: 210px 1fr 210px; /* <<< MAIS espaçado no meio */
+  grid-template-rows: 1fr 118px;          /* <<< BEM MENOR embaixo pra aparecer o slider */
+  gap:10px;                               /* <<< menos gap */
 }
 
 /* painel principal */
 .center, .side, .bottom{
-  border-radius:18px;
+  border-radius:16px; /* um pouco menor */
   border:1px solid var(--stroke);
-  box-shadow: 0 18px 45px rgba(0,0,0,.45);
+  box-shadow: 0 16px 40px rgba(0,0,0,.45);
 }
 
 .center{
@@ -60,7 +59,7 @@ body{
     linear-gradient(135deg, var(--red2), var(--red1));
   position:relative;
   overflow:hidden;
-  padding:16px;
+  padding:10px; /* <<< menos padding */
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -73,14 +72,14 @@ body{
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at 20% 18%, rgba(0,0,0,.30) 0 7px, transparent 8px),
-    radial-gradient(circle at 30% 18%, rgba(0,0,0,.30) 0 7px, transparent 8px),
-    radial-gradient(circle at 40% 18%, rgba(0,0,0,.30) 0 7px, transparent 8px),
-    radial-gradient(circle at 50% 18%, rgba(0,0,0,.30) 0 7px, transparent 8px),
-    radial-gradient(circle at 60% 18%, rgba(0,0,0,.30) 0 7px, transparent 8px),
-    radial-gradient(circle at 70% 18%, rgba(0,0,0,.30) 0 7px, transparent 8px),
-    radial-gradient(circle at 80% 18%, rgba(0,0,0,.30) 0 7px, transparent 8px);
-  opacity:.35;
+    radial-gradient(circle at 20% 14%, rgba(0,0,0,.30) 0 7px, transparent 8px),
+    radial-gradient(circle at 30% 14%, rgba(0,0,0,.30) 0 7px, transparent 8px),
+    radial-gradient(circle at 40% 14%, rgba(0,0,0,.30) 0 7px, transparent 8px),
+    radial-gradient(circle at 50% 14%, rgba(0,0,0,.30) 0 7px, transparent 8px),
+    radial-gradient(circle at 60% 14%, rgba(0,0,0,.30) 0 7px, transparent 8px),
+    radial-gradient(circle at 70% 14%, rgba(0,0,0,.30) 0 7px, transparent 8px),
+    radial-gradient(circle at 80% 14%, rgba(0,0,0,.30) 0 7px, transparent 8px);
+  opacity:.30;
   pointer-events:none;
 }
 
@@ -89,14 +88,14 @@ body{
 .brand{
   font-weight:1000;
   letter-spacing:.14em;
-  font-size: clamp(22px, 4vw, 42px);
+  font-size: clamp(18px, 3.6vw, 36px); /* <<< menor pra não estourar */
   opacity:.9;
   text-shadow: 0 2px 0 rgba(0,0,0,.25);
 }
 
 .nameRow{
-  margin-top:14px;
-  width: min(440px, 92%);
+  margin-top:10px;
+  width: min(520px, 92%); /* <<< mais largo no centro */
 }
 .name{
   width:100%;
@@ -104,57 +103,79 @@ body{
   border:1px solid rgba(255,255,255,.14);
   background: rgba(0,0,0,.22);
   color:var(--text);
-  padding:12px 12px;
+  padding:10px 12px;
   font-weight:800;
-  font-size:16px;
+  font-size:15px;
   text-align:center;
 }
 
-/* lados */
+/* lados — jogando pro canto */
 .side{
   grid-row:1;
-  padding:14px;
+  padding:10px; /* <<< menor */
   background:
     linear-gradient(180deg, rgba(255,255,255,.08), transparent 35%),
     linear-gradient(135deg, rgba(139,16,24,.95), rgba(179,23,35,.95));
   display:flex;
   flex-direction:column;
-  gap:10px;
-  justify-content:center;
+  gap:8px;
+  justify-content:flex-start; /* <<< começa no topo */
   align-items:center;
 }
-.side.left{ grid-column:1; }
-.side.right{ grid-column:3; }
+
+/* empurra o conteúdo mais pro canto e ocupa a borda */
+.side.left{
+  grid-column:1;
+  align-items:flex-start;  /* <<< grudado à esquerda */
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.side.right{
+  grid-column:3;
+  align-items:flex-end;    /* <<< grudado à direita */
+  padding-left: 6px;
+  padding-right: 6px;
+}
 
 .sideTitle{
   font-weight:1000;
   letter-spacing:.10em;
-  font-size:12px;
+  font-size:11px;
   color:rgba(255,255,255,.88);
+  width:100%;
+  text-align:center;
 }
 
 .hint{
-  font-size:12px;
+  font-size:11px;
   color:rgba(255,255,255,.72);
   text-align:center;
+  width:100%;
 }
 
 .dots{
   display:grid;
-  gap:12px;
+  gap:10px;
   justify-items:center;
+  width:100%;
 }
-.side.left .dots{ grid-template-columns: 1fr; }  /* 7 em coluna */
-.side.right .dots{ grid-template-columns: 1fr; } /* 4 em coluna */
+.side.left .dots{
+  justify-items:start; /* <<< bolinhas “no canto” */
+  padding-left: 8px;
+}
+.side.right .dots{
+  justify-items:end;   /* <<< bolinhas “no canto” */
+  padding-right: 8px;
+}
 
 .dot{
-  width:34px;
-  height:34px;
+  width:32px;   /* <<< um pouco menor */
+  height:32px;
   border-radius:999px;
   border:2px solid rgba(0,0,0,.25);
   background: rgba(255,255,255,.28);
   box-shadow: inset 0 0 0 2px rgba(255,255,255,.10),
-              0 10px 22px rgba(0,0,0,.25);
+              0 10px 20px rgba(0,0,0,.22);
   cursor:pointer;
   user-select:none;
   touch-action: manipulation;
@@ -162,26 +183,26 @@ body{
 .dot.on{
   background: rgba(0,0,0,.35);
   box-shadow: inset 0 0 0 2px rgba(255,255,255,.12),
-              0 10px 22px rgba(0,0,0,.25);
+              0 10px 20px rgba(0,0,0,.22);
 }
 .dot:active{ transform: translateY(1px); }
 
-/* bottom: trilha */
+/* bottom: trilha — menor pra aparecer sempre */
 .bottom{
   grid-column:1 / 4;
   grid-row:2;
-  padding:14px;
+  padding:10px;
   background:
     linear-gradient(180deg, rgba(255,255,255,.08), transparent 35%),
     linear-gradient(135deg, var(--red2), var(--red1));
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:8px;
 }
 
 .bottomTop{
   display:flex;
-  gap:10px;
+  gap:8px;
   align-items:center;
   justify-content:space-between;
 }
@@ -189,17 +210,18 @@ body{
 .pill{
   font-weight:1000;
   letter-spacing:.10em;
-  padding:10px 14px;
+  padding:8px 12px;   /* <<< menor */
   border-radius:999px;
   border:1px solid rgba(255,255,255,.15);
   background: rgba(0,0,0,.22);
-  min-width:120px;
+  min-width:110px;
   text-align:center;
+  font-size:12px;
 }
 
 .pa{
   font-weight:900;
-  font-size:18px;
+  font-size:16px;
   opacity:.92;
 }
 
@@ -208,49 +230,50 @@ body{
   background: rgba(0,0,0,.20);
   color:var(--text);
   border-radius:12px;
-  padding:10px 12px;
+  padding:8px 10px;   /* <<< menor */
   font-weight:900;
   cursor:pointer;
+  font-size:12px;
 }
 .btn:active{ transform: translateY(1px); }
 .btn.ghost{ opacity:.95; }
 
 .trackWrap{
   position:relative;
-  height:64px;
-  border-radius:16px;
+  height:44px;       /* <<< MUITO menor */
+  border-radius:14px;
   border:1px solid rgba(255,255,255,.12);
   background: rgba(0,0,0,.18);
   overflow:hidden;
-  padding: 14px 14px 18px;
+  padding: 10px 12px 14px; /* <<< menor */
 }
 
-/* faixa colorida igual ao “danger level” */
+/* faixa colorida */
 .trackColor{
   position:absolute;
-  left:14px; right:14px;
-  top:14px; height:14px;
+  left:12px; right:12px;
+  top:10px; height:12px;
   border-radius:999px;
-  opacity:.9;
+  opacity:.95;
   background: linear-gradient(to right,
     rgba(44,109,230,.85) 0%,
-    rgba(44,109,230,.85) 16.28%, /* 0–6 */
+    rgba(44,109,230,.85) 16.28%,
     rgba(227,193,0,.85) 16.28%,
-    rgba(227,193,0,.85) 44.19%, /* 7–18 */
+    rgba(227,193,0,.85) 44.19%,
     rgba(214,118,18,.85) 44.19%,
-    rgba(214,118,18,.85) 97.67%, /* 19–42 */
+    rgba(214,118,18,.85) 97.67%,
     rgba(204,31,44,.90) 97.67%,
-    rgba(204,31,44,.90) 100%     /* 43 */
+    rgba(204,31,44,.90) 100%
   );
   border:1px solid rgba(255,255,255,.14);
 }
 
 .slider{
   position:absolute;
-  left:14px; right:14px;
-  top:8px;
-  width: calc(100% - 28px);
-  height: 42px;
+  left:12px; right:12px;
+  top:2px;
+  width: calc(100% - 24px);
+  height: 36px;
   background: transparent;
   -webkit-appearance:none;
   appearance:none;
@@ -259,61 +282,56 @@ body{
 .slider::-webkit-slider-thumb{
   -webkit-appearance:none;
   appearance:none;
-  width:22px;
-  height:22px;
+  width:20px;
+  height:20px;
   border-radius:50%;
   background: rgba(255,255,255,.92);
   border:2px solid rgba(0,0,0,.35);
-  box-shadow: 0 12px 22px rgba(0,0,0,.28);
+  box-shadow: 0 10px 18px rgba(0,0,0,.28);
   cursor:pointer;
 }
 .slider::-webkit-slider-runnable-track{
-  height:42px;
+  height:36px;
   background: transparent;
 }
 
 .ticks{
   position:absolute;
-  left:14px; right:14px;
-  bottom:8px;
-  height:10px;
+  left:12px; right:12px;
+  bottom:6px;
+  height:8px;
   display:flex;
   justify-content:space-between;
   pointer-events:none;
   opacity:.85;
 }
-.tick{
-  width:2px;
-  height:10px;
-  background: rgba(255,255,255,.55);
-}
-.tick.big{ height:14px; opacity:.95; }
+.tick{ width:2px; height:8px; background: rgba(255,255,255,.55); }
+.tick.big{ height:11px; opacity:.95; }
 .tickLabel{
   position:absolute;
   bottom:-2px;
   transform: translateX(-50%);
-  font-size:11px;
+  font-size:10px;
   color: rgba(255,255,255,.85);
   text-shadow: 0 1px 0 rgba(0,0,0,.30);
 }
 
-/* responsivo pra celulares menores */
-@media (max-width: 860px){
+/* Ajustes FINOS para celulares menores em landscape */
+@media (max-width: 820px){
   .dash{
-    width: 98vw;
-    height: min(460px, 92vh);
-    grid-template-columns: 150px 1fr 150px;
-    grid-template-rows: 1fr 140px;
+    height: min(380px, 100vh);
+    grid-template-columns: 190px 1fr 190px;
+    grid-template-rows: 1fr 112px;
+    gap:8px;
   }
-  .dot{ width:32px; height:32px; }
+  .dot{ width:30px; height:30px; }
 }
 
 @media (max-width: 680px){
   .dash{
-    grid-template-columns: 130px 1fr 130px;
-    grid-template-rows: 1fr 130px;
-    gap:10px;
+    height: 100vh; /* deixa ocupar tudo */
+    grid-template-columns: 170px 1fr 170px;
+    grid-template-rows: 1fr 110px;
   }
-  .dot{ width:30px; height:30px; gap:10px; }
-  .trackWrap{ height:58px; }
+  .trackWrap{ height:42px; }
 }
